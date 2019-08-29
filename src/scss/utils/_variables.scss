@@ -1,0 +1,40 @@
+// The $space variable is set to 16px, which is equal to 1em, if the body font-size is set to 100%;
+$space: 1rem;
+
+// For rows with gutters
+$gutter-width: 0.5em;
+
+// Fonts
+// This is a font stack to use the OS' default font
+$system-font-stack: -apple-system, '.SFNSText-Regular', 'San Francisco', 'Oxygen', 'Ubuntu', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+
+$font-stack: 'Lexend Deca', $system-font-stack;
+
+$font-copy: $system-font-stack;
+$font-heading: $font-stack;
+
+// Font Sizes
+$font-size-meta: 0.85em;
+
+// Font Weights
+$font-bold: 700;
+$font-medium: 600;
+$font-normal: 400;
+
+// Form Elements
+$button-height: 2.5em;
+ 
+// Box Shadow
+$shadow-sm: 1px 2px 4px 0 rgba($color-primary-500, 0.2);
+$shadow-md: 1px 3px 12px 0 rgba($color-primary-500, 0.2);
+$shadow-lg: 0px 4px 24px 0 rgba($color-primary-500, 0.15);
+
+// Border-radius
+$radius: $space/3;
+$radius-sm: $space/4;
+
+// Z-Index
+$z-layout: 2;
+$z-interactive: 3;
+$z-notifier: 4;
+

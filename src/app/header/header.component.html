@@ -1,0 +1,35 @@
+<header class="container-lg pos-center row row-between">
+
+    <div>
+
+        <a class="mar-r" [routerLink]="['/']">
+            Home
+        </a>
+
+        <a class="mar-r" [routerLink]="['/auth/login']" *ngIf="!user">
+            Log in
+        </a>
+
+        <a class="mar-r" [routerLink]="['/plants/all']">
+            Plants List
+        </a>
+
+        <a class="mar-r" [routerLink]="['/plants/add']">
+            Add Plant
+        </a>
+
+    </div>
+
+    <div>
+        <small *ngIf="user">
+            {{user.fullname}}
+        </small>
+        <button class="btn-tertiary" *ngIf="user && user.isAdmin" [routerLink]="['/admin']">
+            Admin
+        </button>
+        <button class="btn-tertiary" *ngIf="user" (click)="logout()">
+            Logout
+        </button>
+    </div>
+
+</header>

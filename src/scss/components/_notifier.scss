@@ -1,0 +1,67 @@
+// <div class="notifier-neutral">
+//     I am a notifier!
+// </div>
+
+
+@mixin notifier-base {
+    @include card-base;
+
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: $z-notifier;
+
+    width: auto;
+    max-width: 15em;
+
+    @include mq-sm {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    padding-bottom: 1.25em;
+    padding-top: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+
+    color: $color-gray-500;
+    font-weight: $font-medium;
+    font-size: 0.75em;
+    text-align: left;
+
+    border: 1px solid $color-gray-100;
+    box-shadow: $shadow-lg;
+    border-top-width: 5px;
+    border-top-style: solid;
+
+    // Hidden state
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4em);
+    transition: opacity 0.25s ease-in, visibility 0.25s ease, transform 0.3s ease;
+
+    &.-is-active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.notifier-neutral {
+    @include notifier-base();
+
+    border-top-color: $color-secondary;
+}
+
+.notifier-success {
+    @include notifier-base();
+
+    border-top-color: $color-success;
+}
+
+.notifier-warning{
+    @include notifier-base();
+
+    border-top-color: $color-danger;
+}

@@ -1,0 +1,31 @@
+
+<section class="section row container-lg pos-center">
+
+    <div class="row">
+        <h1>Plants List</h1>
+    </div>
+
+    <div class="card col-25" *ngFor="let p of plants" id="{{p._id}}">
+        <img src="{{p.identity.images}}" alt="">
+        <h3>
+            {{p.identity.name}}
+        </h3>
+        <em>
+            {{p.identity.scientificName}}
+        </em>
+        <h5>
+            AKA: {{p.identity.commonNames}}
+        </h5>
+
+        <h6>
+            Growth Habit: {{p.identity.growthHabit}}
+        </h6>
+
+        <p>
+            {{p.identity.summary}}
+        </p>
+
+        <a [routerLink]="['/plants/', p._id]">View Plant Profile</a>
+    </div>
+
+</section>

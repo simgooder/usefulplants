@@ -1,0 +1,297 @@
+
+<form #addPlantForm="ngForm" (ngSubmit)="savePlant(addPlantForm)">
+
+    <div class="row row-between align-center">
+        <h2>
+            Identity
+        </h2>
+
+        <button class="btn-secondary" type="button" (click)="lookUpPlant(plantName)" [class.-is-loading]="loadingWiki" [disabled]="plantName.value.length < 2 || loadingWiki">
+            Wikipedia that shit!
+        </button>
+    </div>
+
+    <app-input-group label="Common name">
+        <input class="input-text" type="text" [(ngModel)]="name" name="name" #plantName>
+    </app-input-group>
+
+    <app-input-group label="Scientific name">
+        <input class="input-text" type="text" [(ngModel)]="scientificName" name="scientificName">
+    </app-input-group>
+
+    <app-input-group label="Also known as">
+        <input class="input-text" type="text" [(ngModel)]="aka" name="aka">
+    </app-input-group>
+
+    <app-input-group label="Images" description="Comma separated URLs">
+        <input class="input-text" type="text" [(ngModel)]="image" name="image">
+    </app-input-group>
+    
+    <app-input-group label="Summary">
+        <textarea class="input-textarea" name="summary" [(ngModel)]="summary"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Growth habit" class="-has-select">
+        <select class="input-select" name="growthHabit" [(ngModel)]="growthHabit">
+            <option value="perennial">perennial</option>
+            <option value="annual">annual</option>
+            <option value="evergreen">evergreen</option>
+            <option value="deciduous">deciduous</option>
+        </select>
+    </app-input-group>
+
+
+    <h2>
+        Habitat
+    </h2>
+
+    <app-input-group label="Hardiness zone minimum">
+        <input type="number" class="input-text" name="hardinessZoneMin" min="0" max="12" [(ngModel)]="hardinessZoneMin">
+    </app-input-group>
+
+    <app-input-group label="Hardiness zone maximum">
+        <input type="number" class="input-text" name="hardinessZoneMax" min="0" max="12" [(ngModel)]="hardinessZoneMax">
+    </app-input-group>
+
+    <app-input-group label="Regions">
+        <input class="input-text" name="regions" [(ngModel)]="regions">
+    </app-input-group>
+    
+    <app-input-group label="Habitat" class="-has-select">
+        <select class="input-select" name="habitat" [(ngModel)]="habitat">
+            <option value="alpine">alpine</option>
+            <option value="bog">bog</option>
+            <option value="boreal">boreal</option>
+            <option value="desert">desert</option>
+            <option value="disturbed (human-caused)">disturbed (human-caused)</option>
+            <option value="field crop (managed)">field crop (managed)</option>
+            <option value="freshwater (lakes, rivers)">freshwater (lakes, rivers)</option>
+            <option value="marine">marine</option>
+            <option value="prairie">prairie</option>
+            <option value="salt marsh">salt marsh</option>
+            <option value="savanna">savanna</option>
+            <option value="shrublands">shrublands</option>
+            <option value="taiga">taiga</option>
+            <option value="temperate">temperate</option>
+            <option value="tree crop (managed)">tree crop (managed)</option>
+            <option value="tropical">tropical</option>
+            <option value="tundra">tundra</option>
+            <option value="wetland">wetland</option>
+        </select>
+    </app-input-group>
+
+
+    <h2>
+        Description
+    </h2>
+
+    <app-input-group label="General description">
+        <textarea class="input-textarea" name="generalDescription" [(ngModel)]="generalDescription"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Leaves">
+        <textarea class="input-textarea" name="leaves" [(ngModel)]="leaves"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Flowers">
+        <textarea class="input-textarea" name="flowers" [(ngModel)]="flowers"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Seeds">
+        <textarea class="input-textarea" name="seeds" [(ngModel)]="seeds"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Profile" class="-has-select">
+        <select class="input-select" name="profile" [(ngModel)]="profile">
+            <option value="tree">tree</option>
+            <option value="shrub">shrub</option>
+            <option value="groundcover">ground-cover</option>
+            <option value="vine">vine</option>
+            <option value="stalk">stalk</option>
+        </select>
+    </app-input-group>
+
+
+    <h2>
+        Uses
+    </h2>
+
+    <app-input-group label="Is it edible?">
+        <label for="edibilitytrue">
+            True
+            <input type="radio" value="true" id="edibilitytrue" name="edible" [(ngModel)]="edible">
+        </label>
+        
+        <label for="edibilityfalse">
+            False
+            <input type="radio" value="false" id="edibilityfalse" name="edible" [(ngModel)]="edible">
+        </label>
+    </app-input-group>
+    <app-input-group label="Edibility notes">
+        <textarea class="input-textarea" name="edibleNotes" [(ngModel)]="edibleNotes"></textarea>
+    </app-input-group>
+        
+    <app-input-group label="Is it useful for wildcrafting?">
+        <label for="wildcraftingtrue">
+            True
+            <input type="radio" value="true" id="wildcraftingtrue" name="wildcraft" [(ngModel)]="wildcraft">
+        </label>
+        
+        <label for="wildcraftingfalse">
+            False
+            <input type="radio" value="false" id="wildcraftingfalse" name="wildcraft" [(ngModel)]="wildcraft">
+        </label>
+    </app-input-group>
+    <app-input-group label="Wildcrafting notes">
+        <textarea class="input-textarea" name="wildcraftNotes" [(ngModel)]="wildcraftNotes"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Is it medicinal?">
+        <label for="medicinaltrue">
+            True
+            <input type="radio" value="true" id="medicinaltrue" name="medicinal" [(ngModel)]="medicinal">
+        </label>
+        
+        <label for="medicinalfalse">
+            False
+            <input type="radio" value="false" id="medicinalfalse" name="medicinal" [(ngModel)]="medicinal">
+        </label>
+    </app-input-group>
+    <app-input-group label="Medicinal notes">
+        <textarea class="input-textarea" name="medicinalNotes" [(ngModel)]="medicinalNotes"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Does it have agricultural value?">
+        <label for="agriculturaltrue">
+            True
+            <input type="radio" value="true" id="agriculturaltrue" name="agriculture" [(ngModel)]="agriculture">
+        </label>
+        
+        <label for="agriculturalfalse">
+            False
+            <input type="radio" value="false" id="agriculturalfalse" name="agriculture" [(ngModel)]="agriculture">
+        </label>
+    </app-input-group>
+    <app-input-group label="Agricultural notes">
+        <textarea class="input-textarea" name="agriculturalNotes" [(ngModel)]="agricultureNotes"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Does it have an ecological function?">
+        <label for="ecologicaltrue">
+            True
+            <input type="radio" value="true" id="ecologicaltrue" name="ecological" [(ngModel)]="ecological">
+        </label>
+        
+        <label for="ecologicalfalse">
+            False
+            <input type="radio" value="false" id="ecologicalfalse" name="ecological" [(ngModel)]="ecological">
+        </label>
+    </app-input-group>
+    <app-input-group label="Ecological function notes">
+        <textarea class="input-textarea" name="ecologicalNotes" [(ngModel)]="ecologicalNotes"></textarea>
+    </app-input-group>
+
+
+    <h2>
+        Care
+    </h2>
+
+    <app-input-group label="Planting Schedule">
+        <input class="input-text" name="plantingSchedule" [(ngModel)]="plantingSchedule">
+    </app-input-group>
+
+    <app-input-group label="Days to maturity">
+        <input class="input-text" type="number" name="daysToMaturity" [(ngModel)]="daysToMaturity">
+    </app-input-group>
+
+    <app-input-group label="Caring instructions">
+        <textarea class="input-textarea" name="instructions" [(ngModel)]="instructions"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Germination instructions">
+        <textarea class="input-textarea" name="germination" [(ngModel)]="germination"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Soil PH">
+        <input class="input-text" type="number" name="soilPh" min="0" max="10" [(ngModel)]="soilPh">
+    </app-input-group>
+
+    <app-input-group label="Nutrition requirements">
+        <textarea class="input-textarea" name="nutrition" [(ngModel)]="nutrition"></textarea>
+    </app-input-group>
+
+    <app-input-group label="Light requirements" class="-has-select">
+        <select class="input-select" name="light" [(ngModel)]="light">
+            <option value="shade tolerant">shade tolerant</option>
+            <option value="low light">low light</option>
+            <option value="partial sun">partial sun</option>
+            <option value="full sun">full sun</option>
+        </select>
+    </app-input-group>
+
+    <app-input-group label="Moisture requirements" class="-has-select">
+        <select class="input-select" name="moisture" [(ngModel)]="moisture">
+            <option value="drought tolerant">drought tolerant</option>
+            <option value="low moisture">lower moisture</option>
+            <option value="high moisture">high moisture</option>
+            <option value="wet feet">wet feet</option>
+        </select>
+    </app-input-group>
+
+
+    <h2>
+        Warnings
+    </h2>
+
+    <app-input-group label="Poisonous">
+        <label for="poisonoustrue">
+            True
+            <input type="radio" value="true" id="poisonoustrue" name="poisonous" [(ngModel)]="poisonous">
+        </label>
+        
+        <label for="poisonousfalse">
+            False
+            <input type="radio" value="false" id="poisonousfalse" name="poisonous" [(ngModel)]="poisonous">
+        </label>
+    </app-input-group>
+
+    <app-input-group label="Invasive">
+        <label for="invasivetrue">
+            True
+            <input type="radio" value="true" id="invasivetrue" name="invasive" [(ngModel)]="invasive">
+        </label>
+        
+        <label for="invasivefalse">
+            False
+            <input type="radio" value="false" id="invasivefalse" name="invasive" [(ngModel)]="invasive">
+        </label>
+    </app-input-group>
+
+    <app-input-group label="Allelopathic">
+        <label for="allelopathictrue">
+            True
+            <input type="radio" value="true" id="allelopathictrue" name="allelopathic" [(ngModel)]="allelopathic">
+        </label>
+        
+        <label for="allelopathicfalse">
+            False
+            <input type="radio" value="false" id="allelopathicfalse" name="allelopathic" [(ngModel)]="allelopathic">
+        </label>
+    </app-input-group>
+
+
+    <h2>
+        References
+    </h2>
+
+    <app-input-group label="References and sources">
+        <input class="input-text" type="text" name="references" [(ngModel)]="references">
+    </app-input-group>
+
+    <app-input-group class="text-right">
+        <button class="btn-primary" type="submit">
+            Save plant
+        </button>
+    </app-input-group>  
+
+</form>

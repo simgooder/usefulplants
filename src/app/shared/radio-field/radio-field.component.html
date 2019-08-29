@@ -1,0 +1,9 @@
+<label for="{{name}}true">
+    {{labelTrue}}
+    <input type="radio" value="{{valueTrue}}" id="{{name}}true" [name]="name" [(ngModel)]="inputModel" (ngModelChange)="inputModelChange.emit(inputModel)">
+</label>
+
+<label for="{{name}}false">
+    {{labelFalse}}
+    <input type="radio" value="{{valueFalse}}" id="{{name}}false" [name]="name" [(ngModel)]="inputModel" (ngModelChange)="inputModelChange.emit(inputModel)">
+</label>

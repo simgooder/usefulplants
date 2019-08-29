@@ -1,0 +1,17 @@
+
+
+// Mobile specific styles ------------
+
+    .mobile-nav-close {
+        @include mq-md {
+            display: none;
+        }
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .mobile-nav-btn {
+        @include mq-md {
+            display: none;
+        }
+    }

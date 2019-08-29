@@ -1,0 +1,25 @@
+// Form Layout
+@mixin input-group {
+    position: relative;
+    width: 100%;
+
+    margin-bottom: 1.5em;
+}
+
+
+.input-group {
+    @include input-group;
+}
+
+
+// Labels ----------
+.input-label {
+    display: inline-block;
+
+    margin-bottom: 0.65em;
+
+    line-height: 1;
+    font-weight: $font-medium;
+    font-size: $font-size-meta;
+    color: $color-gray-500;
+}

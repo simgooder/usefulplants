@@ -1,0 +1,10 @@
+<h1>
+    Admin
+</h1>
+
+<h2>
+    Users
+</h2>
+<div *ngFor="let user of users" id="{{user._id}}">
+    {{user.fullname}} - {{user.email}}
+</div>

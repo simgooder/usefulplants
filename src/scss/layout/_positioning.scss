@@ -1,0 +1,67 @@
+// Positioning ----
+
+.pos-center  {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pos-l {
+    margin-right: auto;
+}
+
+.pos-r {
+    margin-left: auto;
+}
+
+.pos-b {
+    margin-top: auto;
+}
+
+.pos-t {
+    margin-bottom: auto;
+}
+
+.pos-offset-left {
+    // padding-left: calc( calc(100vw - #{$bp-lg}) / 2);
+
+    @include mq-min($bp-lg) {
+        padding-left: calc( calc(100vw - #{$bp-lg}) / 2);
+    }
+}
+
+// Alignment ----
+.align-center {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.align-end {
+    align-items: flex-end;
+    align-self: flex-end;
+}
+
+.align-start {
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.align-stretch {
+    align-items: stretch;
+}
+
+
+// Floats ----
+
+.fl-l {
+    float: left;
+}
+
+.fl-r {
+    float: right;
+}
+
+// Display ---
+.d-ib {
+    display: inline-block;
+}

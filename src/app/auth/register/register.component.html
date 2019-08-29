@@ -1,0 +1,35 @@
+<h2>Register</h2>
+    <form class="example-form" [formGroup]="userForm">
+      <table cellspacing="0" >
+        <tr>
+          <td>
+              <input placeholder="Fullname" formControlName="fullname" name="fullname" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <input placeholder="Email" formControlName="email" name="email" required>
+              <small *ngIf="email.invalid && email.errors.email">Invalid email address</small>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <input placeholder="Password" formControlName="password" type="password" name="password" required>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <input placeholder="Reapet Password" formControlName="repeatPassword" type="password" name="repeatPassword" required>
+              <small *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Password mismatch</small>
+
+          </td>
+        </tr>
+      </table>
+    </form>
+
+  <footer>
+    <button (click)="register()" color="primary">Register</button>
+    <span>Already have an account ? <a [routerLink]="['/auth/login']">login</a> here</span>
+  </footer>

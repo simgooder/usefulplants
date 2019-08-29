@@ -1,0 +1,110 @@
+// Media Query Mixins
+$bp-xs: 520px;  
+$bp-sm: 760px; 
+$bp-md: 1024px;  
+$bp-lg: 1260px; 
+$bp-xl: 1880px; 
+
+
+// Very Small View -- from 0px to $bp-xs
+@mixin mq-xs {
+  @media screen and (max-width: #{$bp-xs}) {
+    @content;
+  }
+}
+
+// General Mobile View -- from 0px to $bp-sm
+@mixin mq-sm {
+  @media screen and (max-width: #{$bp-sm}) {
+    @content;
+  }
+}
+
+// General Tablet View -- between mobile & desktop
+@mixin mq-md {
+  @media screen and (min-width: #{$bp-sm + 1}) {
+    @content;
+  }
+}
+
+
+// General Desktop View
+@mixin mq-lg {
+  @media screen and (min-width: #{$bp-md}) {
+    @content;
+  }
+}
+
+// General Desktop View
+@mixin mq-xl {
+  @media screen and (min-width: #{$bp-lg}) {
+    @content;
+  }
+}
+
+// Custom Media Query
+@mixin mq($custom) {
+  @media screen and (max-width: #{$custom}) {
+    @content;
+  }
+}
+
+// Custom Min-Width Media Query
+@mixin mq-min($custom) {
+  @media screen and (min-width: #{$custom}) {
+    @content;
+  }
+}
+
+
+// Custom Between Media Query
+@mixin mq-between($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max}) {
+    @content;
+  }
+}
+
+
+// Browser Hacks ----------
+
+// Only supported on IOS devices
+@mixin mq-is-ios {
+    @supports (-webkit-overflow-scrolling: touch) {
+        @content;
+    }
+}
+
+// targets Internet Explorer 8,9,10
+// http://keithclark.co.uk/articles/moving-ie-specific-css-into-media-blocks/
+@mixin mq-ie-only {
+  @media screen\0 {
+     @content;
+  }
+}
+
+@mixin mq-firefox-only {
+    @-moz-document url-prefix() { 
+        @content;
+    }
+}
+
+
+
+@mixin responsive-grid-break($selector, $max-width) {
+    @media (max-width: $max-width) {
+        #{$selector} {
+            
+            flex-direction: column;
+            align-items: center;
+
+            .col, .col-10, .col-20, .col-25, .col-30, .col-33, .col-40, .col-50, .col-60, .col-66, .col-67, .col-75, .col-80, .col-90 {
+                flex: 1;
+                margin-bottom: ($space * 3) / 2;
+                margin-left: 0;
+                max-width: 100%;
+                width: 100%;
+            }
+
+        }
+    }
+}

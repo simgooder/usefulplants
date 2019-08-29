@@ -1,0 +1,7 @@
+<span class="input-mask-select">
+    <select class="input-select" [name]="name" [required]="required" [(ngModel)]="inputModel" (ngModelChange)="inputModelChange.emit(inputModel)">
+        <option *ngFor="let option of options" [value]="option" [selected]="default === option">
+            {{option}}
+        </option>
+    </select>
+</span>

@@ -1,0 +1,9 @@
+<div class="input-group {{class}}">
+    <label *ngIf="label" class="label-input">{{label}} {{required === true ? '(required)' : ''}}</label>
+
+    <ng-content>
+    </ng-content>
+
+    <small *ngIf="description" class="label-sm">{{description}}</small>
+</div>
+    

@@ -1,0 +1,22 @@
+
+    <h2>Login</h2>
+    <form class="example-form">
+      <table cellspacing="0">
+        <tr>
+          <td>
+              <input placeholder="Email" [value]="email" name="email" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <input placeholder="Password" [value]="password" type="password" name="password" required>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+  <footer>
+    <button (click)="login()" color="primary">Log in</button>
+    <span>Don't have an account ? <a [routerLink]="['/auth/register']" >register</a> here</span>
+  </footer>
+

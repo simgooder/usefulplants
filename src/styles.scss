@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'scss/utils/colors',
+        'scss/utils/variables',
+        'scss/utils/media-queries',
+        'scss/utils/mixins',
+        'scss/utils/functions';
+
+@import 'scss/base/normalize',
+        'scss/base/helpers',
+        'scss/base/base';
+
+@import 'scss/elements/buttons',
+        'scss/elements/forms',
+        'scss/elements/inputs',
+        'scss/elements/images',
+        'scss/elements/table',
+        'scss/elements/typography';
+
+@import 'scss/components/nav',
+        'scss/components/card',
+        'scss/components/menu',
+        'scss/components/modal',
+        'scss/components/notifier',
+        'scss/components/switch',
+        'scss/components/tabset',
+        'scss/components/tooltip';
+
+@import 'scss/layout/grid',
+        'scss/layout/positioning',
+        'scss/layout/spacing',
+        'scss/layout/containers',
+        'scss/layout/sections';
+
+
+
+

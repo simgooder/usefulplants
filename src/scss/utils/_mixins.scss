@@ -1,0 +1,67 @@
+@mixin clearfix {
+	&:before,
+	&:after {
+	    content: " ";
+	    display: table;
+	}
+}
+
+// Adds a larger hitzone to interactive elements. 
+// Provides a better tap experience on mobile.
+@mixin hitzone($val) {
+    &:after {
+        position: absolute;
+        top: -$val;
+        right: -$val;
+        bottom: -$val;
+        left: -$val;
+        content: ' ';
+    }
+}
+
+// Hide things accessibly
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Cross-browser placeholder styling
+@mixin placeholder($color) {
+    ::-webkit-input-placeholder {
+        color: $color;      
+    }
+    :-moz-placeholder {
+        color: $color;     
+    }
+    ::-moz-placeholder {
+        color: $color;     
+    }
+    :-ms-input-placeholder {
+        color: $color;
+    }
+}
+
+// Adds an ellipsis on overflowing text
+@mixin truncate {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+// Down Arrow
+@mixin arrow-down($width, $color) {
+	content: ' ';
+	width: 0;
+	height: 0;
+	position: absolute;
+
+	border-left: $width solid transparent;
+	border-right: $width solid transparent;
+	border-top: $width solid $color;
+}

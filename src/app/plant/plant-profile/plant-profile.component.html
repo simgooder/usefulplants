@@ -1,0 +1,42 @@
+
+<section class="row container-lg pos-center">
+
+    <ng-container *ngIf="plant">
+        <div [id]="plant._id">
+
+            <h1>
+                {{plant.identity.name}}
+            </h1>
+            <em>
+                {{plant.identity.scientificName}}
+            </em>
+            <h5>
+                Other names: {{plant.identity.aka}}
+            </h5>
+
+            <img src="{{plant.identity.images}}" width="300" alt="">
+
+            <h6>
+                Growth Habit: {{plant.identity.growthHabit}}
+            </h6>
+
+            <p>
+                {{plant.identity.summary}}
+            </p>
+
+            <p>
+                {{plant.identity.description.general}}
+            </p>
+
+            <a class="btn-tertiary" [routerLink]="['/plants/edit', plant._id]">
+                Edit plant
+            </a>
+
+            <a class="btn-tertiary"(click)="delete(plant._id)">
+                Delete plant
+            </a>
+
+        </div>
+    </ng-container>
+
+</section>

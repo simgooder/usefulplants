@@ -1,0 +1,56 @@
+// Inputs ---------
+@mixin input-base {
+    font-size: 1em;
+
+    border: 1px solid $color-gray-300;
+    border-radius: $radius-sm;
+
+    width: 100%;
+    margin: 0 auto;
+
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+
+    line-height: 1.5;
+
+    background-color: transparent;
+
+    transition: 0.15s;
+
+    // focus state
+    &:focus {
+        outline: 0;
+        border-color: $color-primary-500;
+    }
+}
+
+.input-text {
+    @include input-base;
+    height: $button-height;
+}
+
+.input-textarea {
+    @include input-base;
+    height: $button-height * 2;
+    min-height: $button-height;
+
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.input-select {
+    @include input-base;
+}
+
+    .input-group.-has-select::after {
+        content: '';
+        @include arrow-down(0.35em, $color-primary);
+
+        position: absolute;
+        bottom: 0.975rem;
+        right: 1rem;
+
+        user-select: none;
+    }
