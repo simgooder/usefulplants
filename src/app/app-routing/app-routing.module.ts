@@ -4,6 +4,7 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { HomeComponent } from '../home/home.component';
 import { AddPlantComponent } from '../plant/add-plant/add-plant.component'
 import { PlantListComponent } from '../plant/plant-list/plant-list.component';
+import { PlantSearchComponent } from '../plant/plant-search/plant-search.component';
 import { PlantProfileComponent } from '../plant/plant-profile/plant-profile.component';
 import { EditPlantComponent } from '../plant/edit-plant/edit-plant.component';
 
@@ -21,7 +22,10 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: 'app/admin/admin.module#AdminModule'
     },
-
+    {
+        path: 'plants/search',
+        component: PlantSearchComponent
+    },
     {
         path: 'plants/add',
         component: AddPlantComponent

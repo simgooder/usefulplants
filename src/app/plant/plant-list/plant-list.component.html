@@ -1,31 +1,41 @@
 
-<section class="section row container-lg pos-center">
+<section class="section container-lg pos-center">
 
-    <div class="row">
-        <h1>Plants List</h1>
-    </div>
+    <h1>Plants List</h1>
 
-    <div class="card col-25" *ngFor="let p of plants" id="{{p._id}}">
-        <img src="{{p.identity.images}}" alt="">
-        <h3>
-            {{p.identity.name}}
-        </h3>
-        <em>
-            {{p.identity.scientificName}}
-        </em>
-        <h5>
-            AKA: {{p.identity.commonNames}}
-        </h5>
+    <div class="row align-start row-gutters">
 
-        <h6>
-            Growth Habit: {{p.identity.growthHabit}}
-        </h6>
+        <div class="card col-33" *ngFor="let p of plants" id="{{p._id}}">
 
-        <p>
-            {{p.identity.summary}}
-        </p>
+            <figure class="card-image">
+                <img src="{{p.identity.images}}" alt="">
+            </figure>
 
-        <a [routerLink]="['/plants/', p._id]">View Plant Profile</a>
+            <div class="card-content">
+                <h3>
+                    {{p.identity.name}}
+                </h3>
+                <em>
+                    {{p.identity.scientificName}}
+                </em>
+                <h5 *ngIf="p.identity.aka">
+                    AKA: {{p.identity.aka}}
+                </h5>
+
+                <h6>
+                    Growth Habit: {{p.identity.growthHabit}}
+                </h6>
+
+                <p>
+                    {{p.identity.summary}}
+                </p>
+
+                <a [routerLink]="['/plants/', p._id]">View Plant Profile</a>
+            </div>
+
+        </div>
+
     </div>
 
 </section>
+    

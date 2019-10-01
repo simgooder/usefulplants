@@ -4,7 +4,6 @@ import { PlantService } from '../plant-api.service'
 import { Router } from '@angular/router';
 import { WikipediaService } from '../wikipedia.service';
 import { ToastService } from '../../shared/toast/toast.service';
-import { setTimeout } from 'timers';
 
 @Component({
     selector: 'app-plant-form',
@@ -41,6 +40,7 @@ export class PlantFormComponent implements OnInit {
     public generalDescription:any;
     public leaves:any;
     public flowers:any;
+    public fruit:any;
     public seeds:any;
     public profile:any;
 
@@ -75,7 +75,7 @@ export class PlantFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.fetchDatabase("a");
+        // this.fetchDatabase("a");
     }
 
     ngOnChanges(changes: any) {
@@ -101,7 +101,7 @@ export class PlantFormComponent implements OnInit {
                 name: val.name,
                 scientificName: val.scientificName,
                 aka: val.aka,
-                images: val.image,
+                images: this.checkImages(val.image),
                 summary: val.summary,
                 growthHabit: val.growthHabit,
                 
@@ -116,6 +116,7 @@ export class PlantFormComponent implements OnInit {
                     general: val.generalDescription,
                     leaves: val.leaves,
                     flowers: val.flowers,
+                    fruit: val.fruit,
                     seeds: val.seeds,
                     profile: val.profile
                 }
@@ -208,11 +209,12 @@ export class PlantFormComponent implements OnInit {
     // Sets the fields if a plant is passed to the component...
     setFields(plant) {
 
+
         // identity
         this.name = plant.identity.name ? plant.identity.name : "";
         this.scientificName = plant.identity.scientificName ? plant.identity.scientificName : "";
         this.aka = plant.identity.aka ? plant.identity.aka : "";
-        this.image = plant.identity.images ? plant.identity.images : "";
+        this.image = plant.identity.images ? this.checkImages(plant.identity.images) : "";
         this.summary = plant.identity.summary ? plant.identity.summary : "";
         this.growthHabit = plant.identity.growthHabit ? plant.identity.growthHabit : "";
 
@@ -257,6 +259,7 @@ export class PlantFormComponent implements OnInit {
     }
 
   
+    // Search plant on Wikipedia and populate form
     lookUpPlant(plant) {
 
         this.loadingWiki = true;
@@ -310,31 +313,47 @@ export class PlantFormComponent implements OnInit {
 
     }
 
+    checkImages(img) {
 
-    fetchDatabase(letter) {
+        console.log("Checking images...");
+        
+        if ( img[0].includes(',') ) {
 
-        this.Wikipedia.getDb(letter).subscribe( (res) => {
-
-            // TODO:::
-            // 1. Loop through response...
-            // 2. Run lookUpPlant(plantName)
-            // 3a. If exists, fill in fields and SAVE
-            // 3b. If doesn't exist, go on to next! 
-
-            // Set index incrementor
-            // Get length of array (list of plants from DB)
-            // LOOK UP PLANT
-            // when promise is finished, increment the index,
-            // and make the call again ( lookUpAndSavePlant() )
-
-            let l = res.length;
-            let ix = 0;
-
-
-        }, (err) => {
-            console.log("PFAF fetch error: ", err)
-        });
+            return img[0].split(',');
+        
+        } else {
+        
+            return img;
+        
+        }
 
     }
+
+
+    // fetchDatabase(letter) {
+
+    //     this.Wikipedia.getDb(letter).subscribe( (res) => {
+
+    //         // TODO:::
+    //         // 1. Loop through response...
+    //         // 2. Run lookUpPlant(plantName)
+    //         // 3a. If exists, fill in fields and SAVE
+    //         // 3b. If doesn't exist, go on to next! 
+
+    //         // Set index incrementor
+    //         // Get length of array (list of plants from DB)
+    //         // LOOK UP PLANT
+    //         // when promise is finished, increment the index,
+    //         // and make the call again ( lookUpAndSavePlant() )
+
+    //         let l = res.length;
+    //         let ix = 0;
+
+
+    //     }, (err) => {
+    //         console.log("PFAF fetch error: ", err)
+    //     });
+
+    // }
 
 }

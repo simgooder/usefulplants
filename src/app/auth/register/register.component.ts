@@ -6,9 +6,9 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
 import {AuthService} from '../auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['../auth.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['../auth.component.scss']
 })
 export class RegisterComponent implements OnInit {
 

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
 const PlantSchema = new mongoose.Schema({
 
     createdAt: {
@@ -12,17 +14,35 @@ const PlantSchema = new mongoose.Schema({
         default: Date.now
     },
 
+    updatedBy: [
+        {
+            user: String,
+            date: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
+
     identity: {
 
-        name: String,
+        name: { 
+            type: String
+        },
     
-        scientificName: String,
+        scientificName: { 
+            type: String
+        },
         
-        aka: String,
+        aka: { 
+            type: String
+        },
         
-        images: String,
+        images: [String],
     
-        summary: String,
+        summary: { 
+            type: String
+        },
 
         family: {
 
@@ -54,20 +74,27 @@ const PlantSchema = new mongoose.Schema({
             },
 
 
-            regions: String,
+            regions: {
+                type: String,
+                default: ""
+            },
 
             habitat: String
         },
     
         description: {
 
-            general: String,
+            general: {
+                type: String,
+            },
     
             leaves: String,
     
             flowers: String,
     
             seeds: String,
+
+            fruit: String,
     
             profile: {
                 type: String,
@@ -146,16 +173,36 @@ const PlantSchema = new mongoose.Schema({
 
     related: {
 
-        companions: [] // plants that are beneficial when planted together
+        wildCompanions: [
+            {
+                id: ObjectId,
+                name: String
+            }
+        ], // plants that are beneficial when planted together
+        domesticCompanions: [
+            {
+                id: ObjectId,
+                name: String
+            }
+        ]
 
     },
 
-    references: String
+    references: [String]
 
 
 }, {
   versionKey: false
 });
 
+// PlantSchema.set('autoIndex', false);
+PlantSchema.index([
+    {"identity.name": "text"},
+    {"identity.scientificName": "text"},
+    {"identity.summary": "text"},
+    {"identity.aka": "text"},
+    {"description.general": "text"}
+], {name: "baseIndex"})
 
 module.exports = mongoose.model('Plant', PlantSchema);
+

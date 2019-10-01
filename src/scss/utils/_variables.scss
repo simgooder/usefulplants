@@ -22,15 +22,15 @@ $font-medium: 600;
 $font-normal: 400;
 
 // Form Elements
-$button-height: 2.5em;
+$button-height: 2.5rem;
  
 // Box Shadow
-$shadow-sm: 1px 2px 4px 0 rgba($color-primary-500, 0.2);
-$shadow-md: 1px 3px 12px 0 rgba($color-primary-500, 0.2);
-$shadow-lg: 0px 4px 24px 0 rgba($color-primary-500, 0.15);
+$shadow-sm: 1px 2px 4px 0 rgba($color-gray-400, 0.3);
+$shadow-md: 1px 3px 12px 0 rgba($color-gray-400, 0.4);
+$shadow-lg: 0px 4px 24px 0 rgba($color-gray-400, 0.4);
 
 // Border-radius
-$radius: $space/3;
+$radius: $space/2;
 $radius-sm: $space/4;
 
 // Z-Index

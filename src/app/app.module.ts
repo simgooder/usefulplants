@@ -20,6 +20,7 @@ import { PlantListComponent } from './plant/plant-list/plant-list.component';
 import { PlantProfileComponent } from './plant/plant-profile/plant-profile.component';
 import { EditPlantComponent } from './plant/edit-plant/edit-plant.component';
 import { PlantFormComponent } from './plant/plant-form/plant-form.component';
+import { PlantSearchComponent } from './plant/plant-search/plant-search.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { PlantFormComponent } from './plant/plant-form/plant-form.component';
         PlantListComponent,
         PlantProfileComponent,
         EditPlantComponent,
-        PlantFormComponent
+        PlantFormComponent,
+        PlantSearchComponent
     ],
     imports: [
         BrowserModule,

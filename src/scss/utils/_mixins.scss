@@ -47,6 +47,28 @@
     }
 }
 
+
+// Image Cover
+@mixin img-cover {
+    // If the browser supports object-fit (works like background-size:cover)
+    @supports (object-fit: cover) {
+        object-fit: cover;
+        object-position: center center;
+        height: 100%;
+        width: 100%;
+    }
+    @supports not (object-fit: cover) {
+        position: relative;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        min-height: 100%;
+        max-height: 100%;
+        min-width: 100%;
+        max-width: none;
+    }
+}
+
 // Adds an ellipsis on overflowing text
 @mixin truncate {
 	white-space: nowrap;

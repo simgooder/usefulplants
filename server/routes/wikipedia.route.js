@@ -98,10 +98,13 @@ router.get('/q/:id', function(req, res, next) {
             console.log("ERROR ==> ", error)
         })
 
-        page.mainImage().then(x => {
+        // page.mainImage().then(x => {
+        page.images().then(x => {
 
             data.image = x;
             i++;
+
+            console.log("IMAGES ==> ", x)
     
         }, (error) => {
             console.log("ERROR ==> ", error)
@@ -144,65 +147,76 @@ router.get('/q/:id', function(req, res, next) {
 
 
 // Get all plants
-router.get('/pfaf/:id', function(req, res, next) {
+// router.get('/pfaf/:id', function(req, res, next) {
 
-    let url = "https://www.ibiblio.org/pfaf/database/common" + req.params.id.toUpperCase() + ".html"
+//     let url = "https://www.ibiblio.org/pfaf/database/common" + req.params.id.toUpperCase() + ".html"
 
-    https.get(url, (res) => {
+//     https.get(url, (res) => {
 
-        const { statusCode } = res;
+//         const { statusCode } = res;
 
-        let data;
+//         let data;
 
-        let error;
+//         let error;
         
-        if (statusCode !== 200) {
-            error = new Error('Request Failed.\n' +
-                            `Status Code: ${statusCode}`);
-        } 
-        if (error) {
-            console.error(error.message);
-            // Consume response data to free up memory
-            res.resume();
-            return;
-        }
+//         if (statusCode !== 200) {
+//             error = new Error('Request Failed.\n' +
+//                             `Status Code: ${statusCode}`);
+//         } 
+//         if (error) {
+//             console.error(error.message);
+//             // Consume response data to free up memory
+//             res.resume();
+//             return;
+//         }
 
-        res.setEncoding('utf8');
-        let rawData = '';
-        res.on('data', (chunk) => { rawData += chunk; });
-        res.on('end', () => {
+//         res.setEncoding('utf8');
+//         let rawData = '';
+//         res.on('data', (chunk) => { rawData += chunk; });
+//         res.on('end', () => {
 
-            try {
+//             try {
 
-                // This HTML is specific to the page... (this is how we extract it)
-                data = rawData.match(/(?<=CAN=COMIND">\s*).*?(?=\s*\<\/a)/gs);
+//                 // This HTML is specific to the page... (this is how we extract it)
+//                 data = rawData.match(/(?<=CAN=COMIND">\s*).*?(?=\s*\<\/a)/gs);
 
-                sendRes(data);
+//                 sendRes(data);
 
-                // console.log("DATA========> ", data)
+//                 // console.log("DATA========> ", data)
 
-            } catch (e) {
-                console.error(e.message);
-            }
+//             } catch (e) {
+//                 console.error(e.message);
+//             }
 
-        });
+//         });
 
-    }).on('error', (e) => {
-        console.error(`Got error: ${e.message}`);
-    });
+//     }).on('error', (e) => {
+//         console.error(`Got error: ${e.message}`);
+//     });
 
 
-    function sendRes(d) {
+//     function sendRes(d) {
 
-        if (d !== undefined) {
+//         if (d !== undefined) {
 
-            res.send(d)
+//             res.send(d)
 
-        }
+//         }
 
-    }
+//     }
 
-});
+// });
+
+// WHAT I SHOULD DO, BUT... PROGRAMMATICALLY WITH JAVASCRIPT
+// - Hit PFAF page and grab each match
+// - On success => append each to JSON file
+// - ---
+// - Read JSON file => Array
+// - for each item, fill in the usefulPlants CREATE-PLANT form
+// - Submit `name` for Wikipedia search
+// - On success => check if plant info is complete...
+// - if complete, fill in form
+// - Save form!
 
 
 

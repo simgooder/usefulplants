@@ -223,3 +223,14 @@
     display: block;
     width: 100%;
 }
+
+.btn-u-cap {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    box-shadow: none;
+}

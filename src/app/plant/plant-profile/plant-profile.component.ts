@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PlantService } from '../plant-api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-plant-profile',
@@ -19,7 +19,13 @@ export class PlantProfileComponent implements OnInit {
     public plant:any;
 
     ngOnInit() {
-        this.getPlant(this.route.snapshot.params['id']);
+
+        this.route.params.subscribe(params => {
+
+            this.getPlant(params['id']);
+
+        });
+
     }
 
   
@@ -27,13 +33,11 @@ export class PlantProfileComponent implements OnInit {
 
         this.plantService.getById(id).subscribe((res) => {
 
-            console.log("Success: ", res)
-
             this.plant = res;
         
         }, (err) => {
         
-            console.log("Error: ", err);
+            console.warn("Error: ", err);
         
         });
 
@@ -43,10 +47,9 @@ export class PlantProfileComponent implements OnInit {
         this.plantService.delete(id).subscribe((res) => {
 
             this.router.navigate(['/plants/all']);
-            console.log("Success: ", res)
 
         }, (err) => {
-            console.log("Error: ", err);
+            console.warn("Error: ", err);
         })
     }
 

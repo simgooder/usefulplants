@@ -34,24 +34,24 @@ export class WikipediaService {
         
     }
 
-    getDb(letter: string): Observable<any> {
+    // getDb(letter: string): Observable<any> {
 
-        return Observable.create(observer => {
+    //     return Observable.create(observer => {
 
-            this.http.get("/api/wiki/pfaf/" + letter)
-            .subscribe( (data: any) => {
+    //         this.http.get("/api/wiki/pfaf/" + letter)
+    //         .subscribe( (data: any) => {
 
-                observer.next(data);
-                observer.complete();
+    //             observer.next(data);
+    //             observer.complete();
 
-            }, (err) => {
+    //         }, (err) => {
                 
-                this.toast.show(2, "Couldn't get the PFAF database for " + letter + ".", 0)
-                console.log("Error: ", err);
+    //             this.toast.show(2, "Couldn't get the PFAF database for " + letter + ".", 0)
+    //             console.log("Error: ", err);
 
-            });
-        })
+    //         });
+    //     })
         
-    }
+    // }
 
 }

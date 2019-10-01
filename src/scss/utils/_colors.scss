@@ -17,9 +17,9 @@ $color-danger:  #f82d59;
 $color-white:   #fff;
 $color-black:   #111;
 
-$color-gray-500: mix( desaturate($color-primary, 70%), $color-black, 60% );
+$color-gray-500: mix( desaturate($color-primary, 60%), $color-black, 60% );
 $color-gray-400: lighten($color-gray-500, 25%);
 $color-gray-300: lighten($color-gray-400, 25%);
 $color-gray-200: lighten($color-gray-300, 7%);
-$color-gray-100: lighten($color-gray-200, 25%);
+$color-gray-100: lighten($color-gray-200, 12%);
 

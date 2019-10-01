@@ -7,11 +7,11 @@ module.exports = router;
 var Plant = require('../models/plant.model.js');
 
 
-// Get all plants
+// GET ALL PLANTS
 router.get('/', function(req, res, next) {
-    Plant.find(function (err, products) {
+    Plant.find(function (err, plants) {
         if (err) return next(err);
-        res.json(products);
+        res.json(plants);
     });
 });
 
@@ -22,6 +22,14 @@ router.get('/:id', function(req, res, next) {
       res.json(post);
     });
 });
+
+// SEARCH PLANT BY QUERY
+router.get('/q/:q', function(req, res, next) {
+    Plant.find( { $text: { $search: req.params.q, $caseSensitive :false } }, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+})
   
 // SAVE PLANT 
 router.post('/add', function(req, res, next) {

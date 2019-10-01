@@ -19,7 +19,7 @@ async function insert(req, res) {
     res.json(user);
 }
 
-// Get all plants
+// Get all users
 router.get('/all', function(req, res, next) {
     User.find(function (err, products) {
         if (err) return next(err);
