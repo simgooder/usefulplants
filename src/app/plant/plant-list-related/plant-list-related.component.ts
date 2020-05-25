@@ -12,7 +12,7 @@ export class PlantListRelatedComponent implements OnInit, OnChanges {
     @Input() private categories;
     @Input() private limit = 3;
 
-    private plants = [];
+    public plants = [];
 
     constructor(
         private service : PlantService

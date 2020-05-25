@@ -10,15 +10,15 @@ import { PlantService } from '../plant-api.service'
 export class PlantSearchComponent implements OnInit {
 
     @ViewChild('searchInput') protected searchInput:any;
-    @Input() private placeholder = "";
+    @Input() public placeholder = "";
 
     constructor(
         private plantService : PlantService,
     ) { }
 
-    private results:any;
+    public results:any;
     private loading = false;
-    private active = false;
+    public active = false;
     private pageUrl = "";
 
     ngOnInit() {

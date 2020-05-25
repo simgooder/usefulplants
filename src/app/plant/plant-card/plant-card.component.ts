@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlantCardComponent implements OnInit {
 
-    @Input() private plant;
+    @Input() public plant;
 
     public slug:String = "";
 

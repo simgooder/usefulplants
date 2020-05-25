@@ -76,6 +76,10 @@ export class PlantFormComponent implements OnInit {
     public ecologicalNiche:boolean;
     public ecologicalNotes:string;
 
+    public poisonous:boolean;
+    public invasive:boolean;
+    public allelopathic:boolean;
+
 
     constructor(
         private plantService : PlantService, 
