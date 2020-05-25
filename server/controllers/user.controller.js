@@ -12,7 +12,7 @@ const userSchema = Joi.object({
 
 
 module.exports = {
-  insert
+    insert
 }
 
 async function insert(user) {

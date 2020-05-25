@@ -23,25 +23,35 @@ export class PlantFormComponent implements OnInit {
     // The form controls...
 
     // identity
-    public name:any;
-    public scientificName:any;
+    public name:String;
+    public scientificName:String;
+    public genus:String;
+    public species:String;
     public aka:any;
     public image:any;
     public summary:any;
     public growthHabit:any;
 
-    // identity.habitat
+    // habitat
     public hardinessZoneMin:any;
     public hardinessZoneMax:any;
     public regions:any;
     public habitat:any;
 
-    // identity.description
+    // description
     public generalDescription:any;
-    public leaves:any;
-    public flowers:any;
-    public fruit:any;
-    public seeds:any;
+    public leafNotes:any;
+    public leafImage:any;
+    public flowerNotes:any;
+    public flowerImage:any;
+    public fruitNotes:any;
+    public fruitImage:any;
+    public seedNotes:any;
+    public seedImage:any;
+    public rootNotes:any;
+    public rootImage:any;
+    public stalkNotes:any;
+    public stalkImage:any;
     public profile:any;
 
     public plantingSchedule:any;
@@ -55,16 +65,16 @@ export class PlantFormComponent implements OnInit {
 
     public references:any;
 
-    public edible:any;
-    public edibleNotes:any;
-    public wildcraft:any;
-    public wildcraftNotes:any;
-    public medicinal:any;
-    public medicinalNotes:any;
-    public agricultural:any;
-    public agriculturalNotes:any;
-    public ecological:any;
-    public ecologicalNotes:any;
+    public edible:boolean;
+    public edibleNotes:string;
+    public wildcraft:boolean;
+    public wildcraftNotes:string;
+    public medicinal:boolean;
+    public medicinalNotes:string;
+    public agricultural:boolean;
+    public agriculturalNotes:string;
+    public ecologicalNiche:boolean;
+    public ecologicalNotes:string;
 
 
     constructor(
@@ -96,31 +106,50 @@ export class PlantFormComponent implements OnInit {
             
             updatedAt: Date.now(),
 
-            identity: {
+            name: val.name,
+            scientificName: val.scientificName,
+            genus: val.genus,
+            species: val.species,
+            aka: val.aka,
+            images: this.checkArray(val.image),
+            summary: val.summary,
+            growthHabit: val.growthHabit,
+            
+            habitat: {
+                hardinessZoneMin: val.hardinessZoneMin,
+                hardinessZoneMax: val.hardinessZoneMax,
+                regions: val.regions,
+                habitat: val.habitat
+            },
 
-                name: val.name,
-                scientificName: val.scientificName,
-                aka: val.aka,
-                images: this.checkImages(val.image),
-                summary: val.summary,
-                growthHabit: val.growthHabit,
-                
-                habitat: {
-                    hardinessZoneMin: val.hardinessZoneMin,
-                    hardinessZoneMax: val.hardinessZoneMax,
-                    regions: val.regions,
-                    habitat: val.habitat
+            description: {
+                general: val.generalDescription,
+
+                leaf: {
+                    notes: val.leafNotes,
+                    images: this.checkArray(val.leafImage)
+                }, 
+                flower: {
+                    notes: val.flowerNotes,
+                    images: this.checkArray(val.flowerImage)
+                }, 
+                seed: {
+                    notes: val.seedNotes,
+                    images: this.checkArray(val.seedImage)
+                }, 
+                fruit: {
+                    notes: val.fruitNotes,
+                    images: this.checkArray(val.fruitImage)
+                }, 
+                root: {
+                    notes: val.rootNotes,
+                    images: this.checkArray(val.rootImage)
+                }, 
+                stalk: {
+                    notes: val.stalkNotes,
+                    images: this.checkArray(val.stalkImage)
                 },
-
-                description: {
-                    general: val.generalDescription,
-                    leaves: val.leaves,
-                    flowers: val.flowers,
-                    fruit: val.fruit,
-                    seeds: val.seeds,
-                    profile: val.profile
-                }
-
+                profile: val.profile
             },
 
             uses: {
@@ -142,7 +171,7 @@ export class PlantFormComponent implements OnInit {
                     notes: val.agriculturalNotes
                 },
                 ecological: {
-                    potential: Boolean(val.ecological),
+                    niche: val.ecologicalNiche,
                     notes: val.ecologicalNotes
                 }
             },
@@ -209,27 +238,37 @@ export class PlantFormComponent implements OnInit {
     // Sets the fields if a plant is passed to the component...
     setFields(plant) {
 
-
         // identity
-        this.name = plant.identity.name ? plant.identity.name : "";
-        this.scientificName = plant.identity.scientificName ? plant.identity.scientificName : "";
-        this.aka = plant.identity.aka ? plant.identity.aka : "";
-        this.image = plant.identity.images ? this.checkImages(plant.identity.images) : "";
-        this.summary = plant.identity.summary ? plant.identity.summary : "";
-        this.growthHabit = plant.identity.growthHabit ? plant.identity.growthHabit : "";
+        this.name = plant.name ? plant.name : "";
+        this.scientificName = plant.scientificName ? plant.scientificName : "";
+        this.genus = plant.genus ? plant.genus : "";
+        this.species = plant.species ? plant.species : "";
+        this.aka = plant.aka ? plant.aka : "";
+        this.image = plant.images ? this.checkArray(plant.images) : "";
+        this.summary = plant.summary ? plant.summary : "";
+        this.growthHabit = plant.growthHabit ? plant.growthHabit : "";
 
-        // identity.habitat
-        this.hardinessZoneMin = plant.identity.habitat.hardinessZoneMin ? plant.identity.habitat.hardinessZoneMin : "";
-        this.hardinessZoneMax = plant.identity.habitat.hardinessZoneMax ? plant.identity.habitat.hardinessZoneMax : "";
-        this.regions = plant.identity.habitat.regions ? plant.identity.habitat.regions : "";
-        this.habitat = plant.identity.habitat.habitat ? plant.identity.habitat.habitat : "";
+        // habitat
+        this.hardinessZoneMin = plant.habitat.hardinessZoneMin ? plant.habitat.hardinessZoneMin : "";
+        this.hardinessZoneMax = plant.habitat.hardinessZoneMax ? plant.habitat.hardinessZoneMax : "";
+        this.regions = plant.habitat.regions ? plant.habitat.regions : "";
+        this.habitat = plant.habitat.habitat ? plant.habitat.habitat : "";
         
-        // identity.description
-        this.generalDescription = plant.identity.description ? plant.identity.description.general : "";
-        this.flowers = plant.identity.description ? plant.identity.description.flowers : "";
-        this.seeds = plant.identity.description ? plant.identity.description.seeds : "";
-        this.profile = plant.identity.description ? plant.identity.description.profile : "";
-        this.leaves = plant.identity.description.leaves ? plant.identity.description.leaves : "";
+        // description
+        this.generalDescription = plant.description ? plant.description.general : "";
+        this.leafNotes   = plant.description ? plant.description.leaf.notes : "";
+        this.leafImage   = plant.description ? this.checkArray(plant.description.leaf.images) : "";
+        this.flowerNotes = plant.description ? plant.description.flower.notes : "";
+        this.flowerImage = plant.description ? this.checkArray(plant.description.flower.images) : "";
+        this.seedNotes   = plant.description ? plant.description.seed.notes : "";
+        this.seedImage   = plant.description ? this.checkArray(plant.description.seed.images) : "";
+        this.fruitNotes  = plant.description ? plant.description.fruit.notes : "";
+        this.fruitImage  = plant.description ? this.checkArray(plant.description.fruit.images) : "";
+        this.rootNotes   = plant.description ? plant.description.root.notes : "";
+        this.rootImage   = plant.description ? this.checkArray(plant.description.root.images) : "";
+        this.stalkNotes  = plant.description ? plant.description.stalk.notes : "";
+        this.stalkImage  = plant.description ? this.checkArray(plant.description.stalk.images) : "";
+        this.profile     = plant.description ? plant.description.profile : "";
 
         // care
         this.plantingSchedule = plant.care ? plant.care.plantingSchedule : "";
@@ -253,36 +292,36 @@ export class PlantFormComponent implements OnInit {
         this.medicinalNotes = plant.uses.medicinal ? plant.uses.medicinal.notes : "";
         this.agricultural = plant.uses.agricultural ? plant.uses.agricultural.potential : "";
         this.agriculturalNotes = plant.uses.agricultural ? plant.uses.agricultural.notes : "";
-        this.ecological = plant.uses.ecological ? plant.uses.ecological.potential : "";
+        this.ecologicalNiche = plant.uses.ecological ? plant.uses.ecological.niche : "";
         this.ecologicalNotes = plant.uses.ecological ? plant.uses.ecological.notes : "";
 
     }
 
   
     // Search plant on Wikipedia and populate form
-    lookUpPlant(plant) {
+    lookUpPlant(name, scientificName) {
 
         this.loadingWiki = true;
 
-        let q = plant.value;
+        let q = name.value || scientificName.value;
 
         if (q === undefined) {
-            q = plant;
+            q = name || scientificName;
         }
 
         this.Wikipedia.search(q).subscribe((res) => {
-
-            console.log("MESSAGE: ", res.message)
 
             if (res.message === "Success") {
                 
                 this.toast.show(1, "We found some info about " + q + " and added it to the form.", 4000)
 
-                if (plant.value === undefined) {
+                if (name.value === undefined) {
                     this.name = q;
                 }
 
                 this.scientificName = res.scientificName;
+                this.genus = res.genus;
+                this.species = res.species;
                 this.summary = res.summary;
                 this.image = res.image;
                 this.references = res.references;
@@ -290,12 +329,14 @@ export class PlantFormComponent implements OnInit {
 
             } else if (res.message === "Specificity required") {
                 
-                this.toast.show(0, "You'll need to be more specific with you search term...", 0);
+                this.toast.show(0, "You'll need to be more specific with your search.", 0);
 
             } else if (res.message === "Not a plant") {
 
-                this.toast.show(0, "Couldn't find a plant matching this name...", 0);
+                this.toast.show(0, "Couldn't find a plant matching this name.", 0);
 
+            } else if (res.error) {
+                this.toast.show(0, "Error: " + res.error, 0)
             }
 
             this.loadingWiki = false;
@@ -313,18 +354,23 @@ export class PlantFormComponent implements OnInit {
 
     }
 
-    checkImages(img) {
+    checkArray(x) {
 
-        console.log("Checking images...");
-        
-        if ( img[0].includes(',') ) {
+        console.log("Checking arrays...");
 
-            return img[0].split(',');
-        
+        if (x !== undefined && x.length !== 0) {
+
+            if ( x[0].includes(',') ) {
+
+                return x[0].split(',');
+            
+            } else {
+            
+                return x;
+            
+            }
         } else {
-        
-            return img;
-        
+            return;
         }
 
     }

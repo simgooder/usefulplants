@@ -3,7 +3,7 @@
     font-size: 1em;
 
     border: 1px solid $color-gray-300;
-    border-radius: $radius-sm;
+    border-radius: $radius;
 
     width: 100%;
     margin: 0 auto;
@@ -15,14 +15,14 @@
 
     line-height: 1.5;
 
-    background-color: transparent;
+    background-color: $color-white;
 
     transition: 0.15s;
 
     // focus state
     &:focus {
         outline: 0;
-        border-color: $color-primary-500;
+        border-color: $color-primary-300;
     }
 
     // Used with .btn-u-cap to provide space for the `button-cap` to overlay
@@ -31,6 +31,7 @@
     }
 }
 
+
 .input-text {
     @include input-base;
     height: $button-height;
@@ -38,7 +39,7 @@
 
 .input-textarea {
     @include input-base;
-    height: $button-height * 2;
+    height: $button-height * 4;
     min-height: $button-height;
 
     max-width: 100%;
@@ -47,6 +48,7 @@
 
 .input-select {
     @include input-base;
+    height: $button-height;
 }
 
     .input-group.-has-select::after {
@@ -54,25 +56,47 @@
         @include arrow-down(0.35em, $color-primary);
 
         position: absolute;
-        bottom: 0.975rem;
+        bottom: 0.8rem;
         right: 1rem;
 
         user-select: none;
     }
 
 
+.input-multi-select {
+    @include input-base;
+    height: $button-height * 3;
+}
+    .input-multi-select option + option {
+        margin-top: 0.5em;
+    }
+
+
 
 
 .input-search {
+    display: flex;
+    flex-flow: row nowrap;
 
+    width: 100%;
 
     &.-has-popdown {
         position: relative;
+    }
+
+    .input-text {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .btn-primary {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
 
 .input-popdown {
     position: absolute;
+    z-index: $z-layout;
     top: 100%;
     left: 0;
     width: 100%;
@@ -82,6 +106,7 @@
 
     background-color: $color-white;
     border: 2px solid $color-gray-200;
+    border-radius: $radius;
 
     // hidden state
     max-height: 0;
@@ -97,5 +122,15 @@
 
     .input-popdown-item {
         list-style-type: none;
+
+        margin-bottom: 0.5em;
     }
 
+
+
+// Input utils ----------------
+.input-u-sm {
+    height: $button-height / 1.5;
+    
+    font-size: $font-size-meta;
+}

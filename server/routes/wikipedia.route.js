@@ -38,7 +38,7 @@ router.get('/q/:id', function(req, res, next) {
 
                 } 
                 // Ensure the query is a plant...
-                else if ( match.includes("flora") || match.includes("plant") || match.includes("crops") || match.includes("carl linnaeus") || match.includes("plants") ) {
+                else if ( match.includes("flora") || match.includes("plant") || match.includes("crops") || match.includes("carl linnaeus") || match.includes("plants") || match.includes('leaf vegetables') ) {
 
                     data.message = "Success";
                     i++;
@@ -90,6 +90,8 @@ router.get('/q/:id', function(req, res, next) {
             let genus = x.general.genus;
             let species = x.general.species;
 
+            data.genus = genus;
+            data.species = species;
             data.scientificName = genus + " " + species;
 
             i++;
@@ -98,13 +100,15 @@ router.get('/q/:id', function(req, res, next) {
             console.log("ERROR ==> ", error)
         })
 
-        // page.mainImage().then(x => {
         page.images().then(x => {
 
+            x = x.filter(function(img){
+                return !img.includes('.svg') && !img.includes('_Icon'); 
+            });
+            
             data.image = x;
-            i++;
+            i++;  
 
-            console.log("IMAGES ==> ", x)
     
         }, (error) => {
             console.log("ERROR ==> ", error)
@@ -129,7 +133,11 @@ router.get('/q/:id', function(req, res, next) {
         function sendRes() {
 
             // We're waiting for a bunch of responses! (4)
-            if (i >= 6) {
+            if (i >= 7) {                
+
+                if (data.genus === undefined || data.species === undefined) {
+                    data.message = "Specificity required";
+                }
 
                 res.send(data)
 
@@ -140,7 +148,11 @@ router.get('/q/:id', function(req, res, next) {
         }
 
 
-    }, (error) => { res.error(error) } )
+    }, (err) => { 
+        data.error = err.message; 
+        res.send(data); 
+        console.log("ERROR: ", err) 
+    } )
 
 });
 

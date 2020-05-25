@@ -21,6 +21,9 @@ import { PlantProfileComponent } from './plant/plant-profile/plant-profile.compo
 import { EditPlantComponent } from './plant/edit-plant/edit-plant.component';
 import { PlantFormComponent } from './plant/plant-form/plant-form.component';
 import { PlantSearchComponent } from './plant/plant-search/plant-search.component';
+import { PlantFilterComponent } from './plant/plant-filter/plant-filter.component';
+import { PlantCardComponent } from './plant/plant-card/plant-card.component';
+import { PlantListRelatedComponent } from './plant/plant-list-related/plant-list-related.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +35,10 @@ import { PlantSearchComponent } from './plant/plant-search/plant-search.componen
         PlantProfileComponent,
         EditPlantComponent,
         PlantFormComponent,
-        PlantSearchComponent
+        PlantSearchComponent,
+        PlantFilterComponent,
+        PlantCardComponent,
+        PlantListRelatedComponent
     ],
     imports: [
         BrowserModule,

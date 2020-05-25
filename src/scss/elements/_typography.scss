@@ -90,16 +90,13 @@ code {
 // Text Colors
 .text-light {color: $color-white;}
 .text-dark  {color: $color-gray-500;}
+.text-accent {color: $color-accent;}
 
 
 // Links
 a {
     color: $color-primary;
     text-decoration: none;
-    
-    &:hover {
-        color: $color-primary-500;
-    }
 }
 
 /// http://thesassway.com/advanced/modular-css-typography

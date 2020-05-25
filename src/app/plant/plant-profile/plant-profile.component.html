@@ -1,28 +1,27 @@
-
-<article class="pad-t-lg page-container" *ngIf="plant">
+<article class="page-container" *ngIf="plant">
 
     <header class="page-sidebar">
-        
-        <div class="page-image-roll">
-            <img *ngFor="let img of plant.identity.images" class="page-image" src="{{img}}" alt="{{plant.identity.name}}">
-        </div>
 
-        <app-data [meta]="plant.identity.scientificName">
+        <app-data [meta]="plant.scientificName">
             <h1>
-                {{plant.identity.name}}
+                {{plant.name}}
             </h1>
         </app-data>
 
-        <app-data label="Growth Habit" [content]="plant.identity.growthHabit"></app-data>
+        <div class="page-image-roll">
+            <img *ngFor="let img of plant.images" class="page-image" src="{{img}}" alt="{{plant.name}}">
+        </div>
 
-        <app-data label="Summary" [content]="plant.identity.summary"></app-data>
+        <app-data label="Growth Habit" [content]="plant.growthHabit"></app-data>
 
-        <menu class="row row-between">
-            <a class="btn-tertiary" [routerLink]="['/plants/edit', plant._id]">
+        <app-data label="Summary" [content]="plant.summary"></app-data>
+
+        <menu class="row" *ngIf="isAdmin">
+            <a class="btn-secondary btn-u-small mar-r" [routerLink]="['/plants/edit', plant._id, slug]">
                 Edit plant
             </a>
 
-            <a class="btn-tertiary"(click)="delete(plant._id)">
+            <a class="btn-danger btn-u-small"(click)="delete(plant._id)">
                 Delete plant
             </a>
         </menu>
@@ -30,135 +29,142 @@
     </header>
 
     <div class="page-content">
-        
-        <section class="page-card">
 
-            <h2>
-                Habitat
-            </h2>
+        <div class="container-sm">
 
-            <app-data label="Hardiness Zones" content="{{plant.identity.habitat.hardinessZoneMin}} - {{plant.identity.habitat.hardinessZoneMax}}"></app-data>
-
-            <app-data label="Regions" [content]="plant.identity.habitat.regions"></app-data>
-
-            <app-data label="Habitat" [content]="plant.identity.habitat.habitat"></app-data>
-
-        </section>
-
-        <section class="page-card">
-
-            <app-data [content]="plant.identity.description.general">
+            <section class="page-card">
+                
                 <h2>
                     Description
                 </h2>
-            </app-data>
-    
-            <app-data label="Profile" [content]="plant.identity.description.profile"></app-data>
-    
-            <app-data label="Leaves" [content]="plant.identity.description.leaves"></app-data>
 
-            <app-data label="Flowers" [content]="plant.identity.description.flowers"></app-data>
+                <app-data *ngIf="plant.description.general" [content]="plant.description.general"></app-data>
+        
+                <app-data *ngIf="plant.description.profile" label="Profile" [content]="plant.description.profile"></app-data>
+        
+                <app-data *ngIf="plant.description.leaf.notes || plant.description.leaf.images.length > 0" label="Leaves" [content]="plant.description.leaf.notes" [images]="plant.description.leaf.images">
+                </app-data>
 
-            <app-data label="Seeds" [content]="plant.identity.description.seeds"></app-data>
+                <app-data *ngIf="plant.description.flower.notes || plant.description.flower.images.length > 0" label="Flowers" [content]="plant.description.flower.notes" [images]="plant.description.flower.images">
+                </app-data>
 
-            <app-data label="Fruit" [content]="plant.identity.description.fruit"></app-data>
+                <app-data *ngIf="plant.description.seed.notes || plant.description.seed.images.length > 0" label="Seeds" [content]="plant.description.seed.notes" [images]="plant.description.seed.images">
+                </app-data>
 
-        </section>
+                <app-data *ngIf="plant.description.fruit.notes || plant.description.fruit.images.length > 0" label="Fruit" [content]="plant.description.fruit.notes" [images]="plant.description.fruit.images">
+                </app-data>
 
-        <section class="page-card">
+                <app-data *ngIf="plant.description.root.notes || plant.description.root.images.length > 0" label="Root" [content]="plant.description.root.notes" [images]="plant.description.root.images">
+                </app-data>
 
-            <h2>
-                Uses
-            </h2>
+                <app-data *ngIf="plant.description.stalk.notes || plant.description.stalk.images.length > 0" label="Stalk" [content]="plant.description.stalk.notes" [images]="plant.description.stalk.images">
+                </app-data>
 
-            <app-data label="Edible" [content]="plant.uses.edible.notes"></app-data>
+            </section>
 
-            <app-data label="Wildcraft" [content]="plant.uses.wildcraft.notes"></app-data>
+            <section class="page-card">
 
-            <app-data label="Medicinal" [content]="plant.uses.medicinal.notes"></app-data>
+                <h2>
+                    Uses
+                </h2>
 
-            <app-data label="Agricultural" [content]="plant.uses.agricultural.notes"></app-data>
+                <app-data *ngIf="plant.uses.edible.notes" label="Edible" [content]="plant.uses.edible.notes"></app-data>
 
-            <app-data label="Ecological" [content]="plant.uses.ecological.notes"></app-data>
+                <app-data *ngIf="plant.uses.wildcraft.notes" label="Wildcraft" [content]="plant.uses.wildcraft.notes"></app-data>
 
-        </section>
+                <app-data *ngIf="plant.uses.medicinal.notes" label="Medicinal" [content]="plant.uses.medicinal.notes"></app-data>
 
-        <section class="page-card">
+                <app-data *ngIf="plant.uses.agricultural.notes" label="Agricultural" [content]="plant.uses.agricultural.notes"></app-data>
 
-            <h2>
-                Care
-            </h2>
+                <app-data *ngIf="plant.uses.ecological.niche" label="Ecological niche" [content]="plant.uses.ecological.niche"></app-data>
+                <app-data *ngIf="plant.uses.ecological.notes" label="Ecological notes" [content]="plant.uses.ecological.notes"></app-data>
 
-            <app-data label="Planting Schedule" [content]="plant.care.plantingSchedule"></app-data>
+            </section>
 
-            <app-data label="Days to Maturity" [content]="plant.care.daysToMaturity"></app-data>
+            <section class="page-card">
 
-            <app-data label="Planting Instructions" [content]="plant.care.plantingInstructions"></app-data>
+                <h2>
+                    Habitat
+                </h2>
 
-            <app-data label="Germination Instructions" [content]="plant.care.germinationInstructions"></app-data>
+                <app-data *ngIf="plant.habitat.hardinessZoneMin || plant.habitat.hardinessZoneMax" label="Hardiness Zones" content="{{plant.habitat.hardinessZoneMin}} - {{plant.habitat.hardinessZoneMax}}"></app-data>
 
-            <app-data label="Soil PH Requirements" [content]="plant.care.soilPH"></app-data>
+                <app-data *ngIf="plant.habitat.regions" label="Regions" [content]="plant.habitat.regions"></app-data>
 
-            <app-data label="Nutrition Requirements" [content]="plant.care.nutrition"></app-data>
+                <app-data *ngIf="plant.habitat.habitat" label="Habitat" [content]="plant.habitat.habitat"></app-data>
 
-            <app-data label="Light Requirements" [content]="plant.care.light"></app-data>
+            </section>
 
-            <app-data label="Moisture Requirements" [content]="plant.care.moisture"></app-data>
+            <section class="page-card">
 
-        </section>
+                <h2>
+                    Care
+                </h2>
 
-        <section class="page-card">
+                <app-data *ngIf="plant.care.plantingSchedule" label="Planting Schedule" [content]="plant.care.plantingSchedule"></app-data>
 
-            <h2>
-                Warnings
-            </h2>
+                <app-data *ngIf="plant.care.daysToMaturity" label="Days to Maturity" [content]="plant.care.daysToMaturity"></app-data>
 
-            <app-data label="Poisonous" content="{{plant.warnings.poisonous}}"></app-data>
+                <app-data *ngIf="plant.care.plantingInstructions" label="Planting Instructions" [content]="plant.care.plantingInstructions"></app-data>
 
-            <app-data label="Invasive" content="{{plant.warnings.invasive}}"></app-data>
+                <app-data *ngIf="plant.care.germinationInstructions" label="Germination Instructions" [content]="plant.care.germinationInstructions"></app-data>
 
-            <app-data label="Allelopathic" content="{{plant.warnings.allelopathic}}"></app-data>
+                <app-data *ngIf="plant.care.soilPH" label="Soil PH Requirements" [content]="plant.care.soilPH"></app-data>
 
-        </section>
+                <app-data *ngIf="plant.care.nutrition" label="Nutrition Requirements" [content]="plant.care.nutrition"></app-data>
 
-        <section class="page-card">
+                <app-data *ngIf="plant.care.light" label="Light Requirements" [content]="plant.care.light"></app-data>
 
-            <h2>
-                Related Plants
-            </h2>
+                <app-data *ngIf="plant.care.moisture" label="Moisture Requirements" [content]="plant.care.moisture"></app-data>
 
-            <app-data label="Wild Companions (Commonly found in the wild with...)">
-                <ul>
-                    <li *ngFor="let c of plant.related.wildCompanions">
-                        <a [routerLink]="['/plants/', c._id]">
-                            {{c.name}}
-                        </a>
-                    </li>
+            </section>
+
+            <section class="page-card">
+
+                <h2>
+                    Warnings
+                </h2>
+
+                <app-data *ngIf="plant.warnings.poisonous" label="Poisonous" content="{{plant.warnings.poisonous}}"></app-data>
+
+                <app-data *ngIf="plant.warnings.invasive" label="Invasive" content="{{plant.warnings.invasive}}"></app-data>
+
+                <app-data *ngIf="plant.warnings.allelopathic" label="Allelopathic" content="{{plant.warnings.allelopathic}}"></app-data>
+
+            </section>
+
+            <section class="page-card">
+
+                <h2>
+                    Related Plants
+                </h2>
+
+                <app-plant-list-related *ngIf="plant.uses.ecological.niche" [reference]="plant._id" categories="uses.ecological.niche">
+                    <h3 class="data-label mar-b">More <em>{{plant.uses.ecological.niche[0]}}</em>s...</h3>
+                </app-plant-list-related>    
+
+                <app-plant-list-related *ngIf="plant.description.profile" [reference]="plant._id" categories="description.profile">
+                    <h3 class="data-label mar-b">More <em>{{plant.description.profile}}</em> plants...</h3>
+                </app-plant-list-related>
+
+                <app-plant-list-related *ngIf="plant.habitat.habitat" [reference]="plant._id" categories="habitat.habitat">
+                    <h3 class="data-label mar-b">More plants for <em>{{plant.habitat.habitat[0]}}</em> habitats...</h3>
+                </app-plant-list-related>
+
+            </section>
+
+            <section class="page-card">
+
+                <h2>
+                    References &amp; Sources
+                </h2>
+                <ul *ngIf="plant.references">
+                    <li><a [href]="plant.references">{{plant.references}}</a></li>
                 </ul>
-            </app-data>
 
-            <app-data label="Planted Companions (Commonly planted with...)">
-                <ul>
-                    <li *ngFor="let c of plant.related.domesticCompanions">
-                        <a [routerLink]="['/plants/', c._id]">
-                            {{c.name}}
-                        </a>
-                    </li>
-                </ul>
-            </app-data>
+            </section>
 
-        </section>
-
-        <section class="page-card">
-
-            <h2 class="page-heading">
-                References &amp; Sources
-            </h2>
-            <ul>
-                <li><a [href]="plant.references">{{plant.references}}</a></li>
-            </ul>
-
-        </section>
+        </div>
 
     </div>
 

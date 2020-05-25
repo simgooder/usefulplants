@@ -1,0 +1,15 @@
+<div class="card mar-b">
+
+    <figure class="card-image">
+        <img src="{{plant.images[0]}}" alt="{{plant.name}}">
+    </figure>
+    <div class="card-content">
+
+        <app-data [meta]="plant.scientificName" [title]="plant.name">
+        </app-data>
+
+        <a class="card-link" [routerLink]="['/plants/', plant._id, slug]">View Plant Profile</a>
+    
+    </div>
+    
+</div>

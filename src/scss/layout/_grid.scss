@@ -25,6 +25,25 @@
     }
 
 
+    // Uses GRID layout! -----------------------
+    .row-33 {
+
+        @include mq-min($bp-xs) {
+
+        }
+        @include mq-min($bp-xs) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 0.75em; 
+        }
+        @include mq-lg {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 1em; 
+        }
+
+    }
+
 
 .col {
     flex: 1;

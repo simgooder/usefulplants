@@ -1,0 +1,10 @@
+
+<ng-container *ngIf="plants.length > 0">
+    
+    <ng-content></ng-content>
+
+    <div class="row-33">
+        <app-plant-card [plant]="plant" *ngFor="let plant of plants"></app-plant-card>
+    </div>
+
+</ng-container>

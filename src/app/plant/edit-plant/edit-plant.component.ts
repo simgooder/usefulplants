@@ -22,6 +22,12 @@ export class EditPlantComponent implements OnInit {
         
         this.getPlant(this.route.snapshot.params['id']);
 
+        // this.route.params.subscribe(params => {
+
+        //     this.getPlant(params['id']);
+
+        // });
+
     }
 
     getPlant(id) {
@@ -31,7 +37,7 @@ export class EditPlantComponent implements OnInit {
             console.log("Get plant Success: ", res)
 
             if (res === null) {
-                this.router.navigate(['/plants/all']);
+                this.router.navigate(['/']);
             } else {
                 this.plant = res;
             }

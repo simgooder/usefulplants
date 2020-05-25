@@ -24,118 +24,156 @@ const PlantSchema = new mongoose.Schema({
         }
     ],
 
-    identity: {
-
-        name: { 
-            type: String
-        },
-    
-        scientificName: { 
-            type: String
-        },
-        
-        aka: { 
-            type: String
-        },
-        
-        images: [String],
-    
-        summary: { 
-            type: String
-        },
-
-        family: {
-
-            primitiveVariety: {}, // The original parent
-
-            parentVarieties: {}, //  Known parents
-
-            childVarieties: {}, // Child varieties of the parent (landraces, crosses)
-
-            siblingVarieties: {} // Related varities that aren't parent nor child
-
-        },
-    
-        growthHabit: {
-            type: String
-        },
-    
-        habitat: {
-            
-            hardinessZoneMin: {
-                type: Number,
-                min: 0,
-                max: 12
-            },
-            hardinessZoneMax: {
-                type: Number,
-                min: 0,
-                max: 12
-            },
-
-
-            regions: {
-                type: String,
-                default: ""
-            },
-
-            habitat: String
-        },
-    
-        description: {
-
-            general: {
-                type: String,
-            },
-    
-            leaves: String,
-    
-            flowers: String,
-    
-            seeds: String,
-
-            fruit: String,
-    
-            profile: {
-                type: String,
-                default: undefined
-            }
+    createdBy: {
+        user: String,
+        date: {
+            type: Date,
+            default: Date.now
         }
+    },
+
+    name: { 
+        type: String
+    },
+
+    scientificName: { 
+        type: String
+    },
+
+    genus: {
+        type: String
+    },
+
+    species: {
+        type: String
+    },
     
+    aka: { 
+        type: String
+    },
+    
+    images: [String],
+
+    summary: { 
+        type: String
+    },
+
+    // family: {
+
+    //     primitiveVariety: {}, // The original parent
+
+    //     parentVarieties: {}, //  Known parents
+
+    //     childVarieties: {}, // Child varieties of the parent (landraces, crosses)
+
+    //     siblingVarieties: {} // Related varities that aren't parent nor child
+
+    // },
+
+    growthHabit: {
+        type: String
+    },
+
+    habitat: {
+        
+        hardinessZoneMin: {
+            type: Number,
+            min: 0,
+            max: 12
+        },
+        hardinessZoneMax: {
+            type: Number,
+            min: 0,
+            max: 12
+        },
+
+        regions: {
+            type: String,
+            default: ""
+        },
+
+        habitat: [String]
+    },
+
+    description: {
+
+        general: {
+            type: String,
+        },
+
+        leaf: {
+            notes: String,
+            images: [String]
+        },
+
+        flower: {
+            notes: String,
+            images: [String]
+        },
+
+        seed: {
+            notes: String,
+            images: [String]
+        },
+
+        fruit: {
+            notes: String,
+            images: [String]
+        },
+
+        root: {
+            notes: String,
+            images: [String]
+        },
+
+        stalk: {
+            notes: String,
+            images: [String]
+        },
+
+        profile: String
     },
 
     uses: {
 
         edible: {
             potential: Boolean,
-            notes: String
+            notes: String,
+            source: String
         },
     
         wildcraft: {
             potential: Boolean,
-            notes: String
+            notes: String,
+            source: String
         },
         
         medicinal: {
             potential: Boolean,
-            notes: String
+            notes: String,
+            source: String
         },
     
         agricultural: {
             potential: Boolean,
-            notes: String
+            notes: String,
+            source: String
         },
     
         ecological: {
-            potential: Boolean,
-            notes: String
+            niche: [String],
+            notes: String,
+            source: String
         }
     
     },
 
     care: {
 
-        plantingSchedule: String,
+        plantingSchedule: { 
+            type: String,
+            default: ""
+        },
     
         daysToMaturity: Number,
     
@@ -173,18 +211,8 @@ const PlantSchema = new mongoose.Schema({
 
     related: {
 
-        wildCompanions: [
-            {
-                id: ObjectId,
-                name: String
-            }
-        ], // plants that are beneficial when planted together
-        domesticCompanions: [
-            {
-                id: ObjectId,
-                name: String
-            }
-        ]
+        wildCompanions: [ObjectId], 
+        domesticCompanions: [ObjectId] // plants that are beneficial when planted together
 
     },
 
@@ -192,16 +220,22 @@ const PlantSchema = new mongoose.Schema({
 
 
 }, {
-  versionKey: false
+  versionKey: true
 });
 
 // PlantSchema.set('autoIndex', false);
 PlantSchema.index([
-    {"identity.name": "text"},
-    {"identity.scientificName": "text"},
-    {"identity.summary": "text"},
-    {"identity.aka": "text"},
-    {"description.general": "text"}
+    {"name": "text"},
+    {"scientificName": "text"},
+    {"genus": "text"},
+    {"species": "text"},
+    {"summary": "text"},
+    {"aka": "text"},
+    {"growthHabit": "text"},
+    {"description.general": "text"},
+    {"description.profile": "text"},
+    {"uses.ecological.niche": "text"},
+    {"habitat.habitat": "text"}
 ], {name: "baseIndex"})
 
 module.exports = mongoose.model('Plant', PlantSchema);

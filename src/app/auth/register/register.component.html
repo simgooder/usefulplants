@@ -1,37 +1,38 @@
-<section class="container-sm pos-center">
+<section class="container-xs pos-center mar-t-xl card">
 
-<h2>Register</h2>
+    <h2>Register</h2>
 
-<form [formGroup]="userForm">
+    <form [formGroup]="userForm">
 
-    <div class="input-group">
-        <label for="email" class="input-label">Name</label>
-        <input class="input-text" placeholder="Your name here" formControlName="fullname" name="fullname" required>
-    </div>
+        <div class="input-group">
+            <label for="email" class="input-label">Name</label>
+            <input class="input-text" placeholder="Your name here" formControlName="fullname" name="fullname" required>
+        </div>
 
-    <div class="input-group">
-        <label for="email" class="input-label">Email</label>
-        <input class="input-text" placeholder="email@domain.com" formControlName="email" name="email" required>
-        <small *ngIf="email.invalid && email.errors.email">Invalid email address</small>
-    </div>
+        <div class="input-group">
+            <label for="email" class="input-label">Email</label>
+            <input class="input-text" placeholder="email@domain.com" formControlName="email" name="email" required>
+            <small *ngIf="email.invalid && email.errors.email">Invalid email address</small>
+        </div>
 
-    <div class="input-group">
-        <label for="email" class="input-label">Password</label>
-        <input class="input-text" placeholder="super!SecretPa55w0rd" formControlName="password" type="password" name="password" required>
-    </div>
+        <div class="input-group">
+            <label for="email" class="input-label">Password</label>
+            <input class="input-text" placeholder="••••••••" formControlName="password" type="password" name="password" required>
+        </div>
 
-    <div class="input-group">
-        <label for="email" class="input-label">Reset Password</label>
-        <input class="input-text" placeholder="Repeat Password" formControlName="repeatPassword" type="password" name="repeatPassword" required>
-        <small *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Passwords don't match</small>
-    </div>
+        <div class="input-group">
+            <label for="email" class="input-label">Repeat Password</label>
+            <input class="input-text" placeholder="••••••••" formControlName="repeatPassword" type="password" name="repeatPassword" required>
+            <small *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Passwords don't match</small>
+        </div>
 
-</form>
+    </form>
 
     <div class="input-group">
         <button class="btn-primary" (click)="register()">Register</button>
         <br>
-        <small>Already have an account? <a [routerLink]="['/auth/login']">Log in</a> here</small>
+        <small>Already have an account? <br>
+        <a [routerLink]="['/auth/login']">Log in</a> here</small>
     </div>
 
 </section>

@@ -1,0 +1,29 @@
+    
+<form #plantFilters="ngForm" (ngSubmit)="submitFilters(plantFilters)">
+
+    <app-input-group label="Filter by Plant Profile" class="-has-select">
+        <select class="input-select" name="profile" ngModel id="profile">
+            <option>Select an option</option>
+            <option value="tree">Tree</option>
+            <option value="shrub">Shrub</option>
+            <option value="groundcover">Ground-cover</option>
+            <option value="vine">Vine</option>
+            <option value="herbaceous">Herbaceous</option>
+        </select>
+    </app-input-group>
+
+    <app-input-group label="Filter by Growth Habits" class="-has-select">
+        <select class="input-select" name="growthHabit" ngModel id="growthHabit">
+            <option>Select an option</option>
+            <option value="perennial">Perennial</option>
+            <option value="annual">Annual</option>
+            <option value="evergreen">Evergreen</option>
+            <option value="deciduous">Deciduous</option>
+        </select>
+    </app-input-group>
+
+    <div class="text-right">
+        <button class="btn-primary" type="submit">Update</button>
+    </div>
+
+</form>

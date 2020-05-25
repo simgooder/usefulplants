@@ -1,5 +1,4 @@
-
-<section class="container-sm pos-center">
+<section class="container-xs pos-center mar-t-xl card">
 
     <h2>Login</h2>
 
@@ -16,7 +15,7 @@
             <label for="password" class="input-label">
                 Password
             </label>
-            <input class="input-text" placeholder="super!SecretPa55w0rd" type="password" #userPassword name="password" required>
+            <input class="input-text" placeholder="••••••••••" type="password" #userPassword name="password" required>
         </div>
 
         <div class="input-group">
@@ -25,7 +24,8 @@
             </button>
             <br>
             <small>
-                Don't have an account? <a [routerLink]="['/auth/register']" >Register</a> here
+                Don't have an account? <br>
+                <a [routerLink]="['/auth/register']" >Register</a> here
             </small>
         </div>
 

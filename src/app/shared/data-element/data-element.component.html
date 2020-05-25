@@ -1,0 +1,29 @@
+<div class="data-element">
+
+    <ng-content></ng-content>
+    <h2 *ngIf="title" class="data-title">
+        {{title}}
+    </h2>
+    
+    <h3 *ngIf="label" class="data-label">
+        {{label}}
+    </h3>
+
+    <h3 *ngIf="meta" class="data-meta">
+        {{meta}}
+    </h3>
+
+    <div class="page-image-roll mar-t-sm" *ngIf="hasImages == true">
+        <img class="page-image" *ngFor="let img of images" src="{{img}}" alt="">
+    </div>
+
+    <p *ngIf="content" [class.truncate]="truncate == 'content'" class="data-content">
+        <ng-container *ngIf="isContentArray === false">{{content}}</ng-container>
+        <ng-container *ngIf="isContentArray === true">
+            <ng-container *ngFor="let c of contentArray; let i = index">
+                {{c}}<span *ngIf="contentArray.length > 1 && i + 1 !== contentArray.length">,</span>
+            </ng-container>
+        </ng-container>
+    </p>
+
+</div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlantService } from '../plant-api.service'
+import { PlantFilterComponent } from '../plant-filter/plant-filter.component';
 
 @Component({
     selector: 'app-plant-list',
@@ -8,9 +9,26 @@ import { PlantService } from '../plant-api.service'
 })
 export class PlantListComponent implements OnInit {
 
-    constructor(private plantService : PlantService) { }
-
     public plants:any;
+    @ViewChild(PlantFilterComponent) filter;
+
+    constructor(private plantService : PlantService) {}
+
+    // onFilter($event) {
+        
+    //     this.plantService.filterPlants($event).subscribe((res) => {
+
+    //         console.log("Success: ", res)
+
+    //         this.plants = res;
+        
+    //     }, (err) => {
+        
+    //             console.log("Error: ", err);
+        
+    //     });;
+
+    // }
 
     ngOnInit() {
         this.getPlants();

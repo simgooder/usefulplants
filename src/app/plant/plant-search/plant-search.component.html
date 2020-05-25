@@ -1,0 +1,23 @@
+<form (ngSubmit)="search(searchInput.value)">
+
+    <div class="input-search -has-popdown">
+        <input class="input-text" [placeholder]="placeholder" type="search" #searchInput (blur)="close()" (focus)="onFocus()">
+
+        <menu class="input-popdown"  [ngClass]="{'-is-active': active}">
+            <li class="input-popdown-item" *ngFor="let result of results" (click)="select(result._id)">
+                <a [routerLink]="pageUrl" class="row align-center">
+                    <img src="{{result.images[0]}}" width="40" alt="">
+                    <div class="mar-l-sm">
+                        {{result.name}}<br>
+                        <em>{{result.scientificName}}</em>
+                    </div>
+                </a>
+            </li>
+        </menu>
+
+        <button class="btn-primary" type="submit">
+            Search
+        </button>
+    </div>
+
+</form>

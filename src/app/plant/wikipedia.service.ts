@@ -27,7 +27,6 @@ export class WikipediaService {
             }, (err) => {
                 
                 this.toast.show(2, "Couldn't reach Wikipedia. Sorry!", 0)
-                console.log("Error: ", err);
 
             });
         })

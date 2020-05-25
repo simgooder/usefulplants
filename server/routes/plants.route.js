@@ -18,8 +18,8 @@ router.get('/', function(req, res, next) {
 // GET SINGLE PLANT BY ID 
 router.get('/:id', function(req, res, next) {
     Plant.findById(req.params.id, function (err, post) {
-      if (err) return next(err);
-      res.json(post);
+        if (err) return next(err);
+        res.json(post);
     });
 });
 
@@ -30,6 +30,21 @@ router.get('/q/:q', function(req, res, next) {
         res.json(post);
     });
 })
+
+// Get all plants that meet criteria
+router.get('/related/:reference', function(req, res, next) {
+
+    let prop = req.query.prop;
+    let val = req.query.val;
+    let limit = Number(req.query.limit);
+    let ref = req.params.reference;
+
+    Plant.find( { $and: [ { [prop] : val }, { _id: { $ne: ref } } ] }, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    }).limit(limit);
+})
+
   
 // SAVE PLANT 
 router.post('/add', function(req, res, next) {

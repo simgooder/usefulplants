@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
-import { HomeComponent } from '../home/home.component';
+// import { HomeComponent } from '../home/home.component';
 import { AddPlantComponent } from '../plant/add-plant/add-plant.component'
 import { PlantListComponent } from '../plant/plant-list/plant-list.component';
 import { PlantSearchComponent } from '../plant/plant-search/plant-search.component';
@@ -12,7 +12,7 @@ import { EditPlantComponent } from '../plant/edit-plant/edit-plant.component';
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: PlantListComponent
     }, 
     {
         path: 'auth',
@@ -20,7 +20,7 @@ const routes: Routes = [
     }, 
     {
         path: 'admin',
-        loadChildren: 'app/admin/admin.module#AdminModule'
+        loadChildren: 'app/admin/admin.module#AdminModule',
     },
     {
         path: 'plants/search',
@@ -28,19 +28,21 @@ const routes: Routes = [
     },
     {
         path: 'plants/add',
-        component: AddPlantComponent
+        component: AddPlantComponent,
+        canActivate: [AuthGuard]
     },
+    // {
+    //     path: 'plants/all',
+    //     component: PlantListComponent
+    // },
     {
-        path: 'plants/all',
-        component: PlantListComponent
-    },
-    {
-        path: 'plants/:id',
+        path: 'plants/:id/:name',
         component: PlantProfileComponent
     },
     {
-        path: 'plants/edit/:id',
-        component: EditPlantComponent
+        path: 'plants/edit/:id/:name',
+        component: EditPlantComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

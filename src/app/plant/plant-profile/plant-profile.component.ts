@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PlantService } from '../plant-api.service';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-plant-profile',
@@ -9,16 +10,26 @@ import { Router, ActivatedRoute} from '@angular/router';
 })
 export class PlantProfileComponent implements OnInit {
 
-
     constructor(
         private plantService : PlantService, 
-        private route: ActivatedRoute,
-        private router: Router
+        private authService : AuthService,
+        private route : ActivatedRoute,
+        private router : Router
     ) { }
 
     public plant:any;
+    public slug:String = "";
+    private user:any;
+    public isAdmin = false;
 
-    ngOnInit() {
+    ngOnInit() {        
+
+        // init this.user on startup
+        this.authService.me().subscribe(data => {
+            this.user = data.user;
+            this.isAdmin = (this.user.roles.indexOf('admin') > -1);
+            // console.log(this.user); 
+        });
 
         this.route.params.subscribe(params => {
 
@@ -34,6 +45,8 @@ export class PlantProfileComponent implements OnInit {
         this.plantService.getById(id).subscribe((res) => {
 
             this.plant = res;
+
+            this.slug = this.plant.scientificName.replace(" ", "_");
         
         }, (err) => {
         
@@ -46,7 +59,7 @@ export class PlantProfileComponent implements OnInit {
     delete(id) {
         this.plantService.delete(id).subscribe((res) => {
 
-            this.router.navigate(['/plants/all']);
+            this.router.navigate(['/']);
 
         }, (err) => {
             console.warn("Error: ", err);

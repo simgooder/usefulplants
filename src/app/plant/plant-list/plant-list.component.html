@@ -1,41 +1,37 @@
+<article class="page-container">
 
-<section class="section container-lg pos-center">
+    <header class="page-sidebar">
+        
+        <div class="container-xs">
+            <h3>
+                Plant Search
+            </h3>
 
-    <h1>Plants List</h1>
+            <app-input-group description="Use scientific or common names, or by growth habit: 'perennial'">
+                <app-plant-search></app-plant-search>
+            </app-input-group>
+        </div>
 
-    <div class="row align-start row-gutters">
+        <!-- <h3 class="mar-t-lg">
+            Filter Plants
+        </h3>
 
-        <div class="card col-33" *ngFor="let p of plants" id="{{p._id}}">
+        <app-plant-filter (sendFilters)="onFilter($event)"></app-plant-filter> -->
 
-            <figure class="card-image">
-                <img src="{{p.identity.images}}" alt="">
-            </figure>
+    </header>
 
-            <div class="card-content">
-                <h3>
-                    {{p.identity.name}}
-                </h3>
-                <em>
-                    {{p.identity.scientificName}}
-                </em>
-                <h5 *ngIf="p.identity.aka">
-                    AKA: {{p.identity.aka}}
-                </h5>
+    <div class="page-content">
 
-                <h6>
-                    Growth Habit: {{p.identity.growthHabit}}
-                </h6>
+        <h1>Useful plants</h1>
 
-                <p>
-                    {{p.identity.summary}}
-                </p>
+        <div class="row-33">
 
-                <a [routerLink]="['/plants/', p._id]">View Plant Profile</a>
-            </div>
+            <ng-container *ngFor="let p of plants">
+                <app-plant-card [plant]="p"></app-plant-card>
+            </ng-container>
 
         </div>
 
     </div>
-
-</section>
     
+</article>
